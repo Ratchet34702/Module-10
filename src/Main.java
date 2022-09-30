@@ -12,6 +12,10 @@ public class Main {
         System.out.println(task2(nameList));
         System.out.println(task3(numberArray));
 
+        long a = 25214903917L;
+        long c = 11;
+        long m = 1L << 48;
+        System.out.println(task4(2003, a, c, m).limit(7).collect(Collectors.toList()));
     }
 
     static String task1(List<String> nameList) {
@@ -39,6 +43,11 @@ public class Main {
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+    static Stream<Long> task4(long seed, long a, long c, long m) {
+        return Stream.iterate(seed, x -> (a * x + c) % m);
+    }
+
 }
 
 
