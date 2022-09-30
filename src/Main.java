@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,6 +14,10 @@ public class Main {
         long c = 11;
         long m = 1L << 48;
         System.out.println(task4(2003, a, c, m).limit(7).collect(Collectors.toList()));
+
+        List<Integer> firstList = List.of(0, 2, 4, 6, 8);
+        List<Integer> secondList = List.of(1, 3, 5, 7, 9);
+        System.out.println(zip(firstList.stream(), secondList.stream()).collect(Collectors.toList()));
     }
 
     static String task1(List<String> nameList) {
@@ -46,6 +48,17 @@ public class Main {
 
     static Stream<Long> task4(long seed, long a, long c, long m) {
         return Stream.iterate(seed, x -> (a * x + c) % m);
+    }
+
+    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
+        List<T> resultList = new ArrayList<>();
+        Iterator<T> firstIterator = first.iterator();
+        Iterator<T> secondIterator = second.iterator();
+        while (firstIterator.hasNext() && secondIterator.hasNext()) {
+            resultList.add(firstIterator.next());
+            resultList.add(secondIterator.next());
+        }
+        return resultList.stream();
     }
 
 }
